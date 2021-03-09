@@ -22,5 +22,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: windows-build
-          path: ${{ github.workspace }}/windows-build.exe
+          path: ${{ github.workspace }}/src/windows-build.exe
 

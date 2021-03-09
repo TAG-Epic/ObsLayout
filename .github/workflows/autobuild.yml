@@ -18,9 +18,11 @@ jobs:
         run: cd src && go build -o windows-build.exe .
         env:
           GOOS: windows
+      - name: Packaging
+        run: mkdir pack && mv static pack && mv windows-build.exe pack
 
       - uses: actions/upload-artifact@v2
         with:
           name: windows-build
-          path: ${{ github.workspace }}/src/windows-build.exe
+          path: ${{ github.workspace }}/src/pack
 

@@ -15,12 +15,12 @@ jobs:
           go-version: '1.14.0'
 
       - name: Run build
-        run: cd src && go build -o windows-build.exe . && ls
+        run: cd src && go build -o windows-build.exe .
         env:
           GOOS: windows
 
       - uses: actions/upload-artifact@v2
         with:
           name: windows-build
-          path: windows-build.exe
+          path: ${{ github.workspace }}/windows-build.exe
 

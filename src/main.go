@@ -3,8 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"time"
+)
+
+var (
+	startTime = time.Now()
 )
 
 func main() {
@@ -17,9 +22,11 @@ func getStatValue(writer http.ResponseWriter, request *http.Request) {
 	statType := request.URL.Query().Get("stat")
 	log.Printf("Getting stat %s", statType)
 	if statType == "time" {
-		t := time.Now()
-		formattedTime := fmt.Sprintf("%d:%d:%d", t.Hour(), t.Minute(), t.Second())
+		t := time.Since(startTime).Round(time.Second)
+		formattedTime := fmt.Sprintf("%s", t)
 		fmt.Fprint(writer, formattedTime)
+	} else if statType == "random" {
+		fmt.Fprint(writer, rand.Int())
 	} else {
 		fmt.Fprint(writer, "Unknown stat, please check the http://localhost:8080")
 	}
